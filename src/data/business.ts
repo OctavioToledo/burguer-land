@@ -5,14 +5,14 @@ import type { Negocio } from '../lib/tipos.ts'
  * nombre, contacto, horarios, envío, pagos y textos institucionales.
  */
 export const negocio: Negocio = {
-  nombre: 'Nombre Burger',
-  bajada: '(a la parrilla)',
-  slogan: 'Hamburguesas de verdad, hechas al momento con carne fresca y pan de masa madre.',
-  logoTexto: 'Nombre Burger',
-  logoImagen: null,
+  nombre: 'Smash Art',
+  bajada: '(smash burgers)',
+  slogan: 'Carne aplastada contra la plancha caliente, bordes crocantes y cheddar que chorrea. Hechas al momento, una por una.',
+  logoTexto: 'Smash Art',
+  logoImagen: { src: '/img/logo-smash-art.webp', ancho: 720, alto: 405 },
 
-  whatsapp: '5492634000000',
-  whatsappVisible: '+54 9 263 400-0000',
+  whatsapp: '5492634555208',
+  whatsappVisible: '+54 9 2634 55-5208',
 
   direccion: 'Av. San Martín 1234',
   localidad: 'San Martín',
@@ -39,7 +39,7 @@ export const negocio: Negocio = {
   },
 
   // Dejar una red en '' para ocultarla.
-  redes: { instagram: 'nombreburger', facebook: 'nombreburger', tiktok: '' },
+  redes: { instagram: 'smashart', facebook: '', tiktok: '' },
 
   envio: {
     costo: 2500,
@@ -48,12 +48,12 @@ export const negocio: Negocio = {
   },
   retiro: { demora: '20 a 30 min' },
   mediosDePago: ['efectivo', 'transferencia'],
-  transferencia: { alias: 'NOMBRE.BURGER.MP', titular: 'Nombre Burger SRL' },
+  transferencia: { alias: 'SMASH.ART.MP', titular: 'Smash Art' },
   pedidoMinimo: 10000,
 
   historia: [
-    'Arrancamos en 2019 con una parrilla, un carro y una idea fija: hacer la hamburguesa que nosotros queríamos comer.',
-    'Hoy seguimos igual. Picamos la carne todos los días, horneamos el pan de masa madre a la mañana y cocinamos cada pedido en el momento. Sin congelados, sin apuro.',
+    'Arrancamos con una plancha, unos aerosoles y una idea fija: hacer la smash burger que nosotros queríamos comer, en un lugar que se pareciera a la calle.',
+    'Picamos la carne todos los días, la aplastamos al momento contra la plancha bien caliente y la servimos con el borde crocante. Sin congelados, sin apuro.',
   ],
 
   fotos: {

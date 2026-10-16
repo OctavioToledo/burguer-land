@@ -1,6 +1,21 @@
 import { negocio } from '../data/business'
 
-export function Logo({ className = '' }: { className?: string }) {
-  if (negocio.logoImagen) return <img src={negocio.logoImagen} alt={negocio.nombre} className={`logo-img ${className}`} width={140} height={40} />
-  return <span className={`logo ${className}`}>{negocio.logoTexto}</span>
+/** `sizes` solo importa en la portada, donde el logo se muestra grande. */
+export function Logo({ className = '', sizes = '120px', prioridad = false }: { className?: string; sizes?: string; prioridad?: boolean }) {
+  const logo = negocio.logoImagen
+  if (!logo) return <span className={`logo ${className}`}>{negocio.logoTexto}</span>
+  const chico = logo.src.replace(/\.webp$/, '-360.webp')
+  return (
+    <img
+      src={logo.src}
+      srcSet={`${chico} 360w, ${logo.src} ${logo.ancho}w`}
+      sizes={sizes}
+      alt={negocio.nombre}
+      width={logo.ancho}
+      height={logo.alto}
+      className={`logo-img ${className}`}
+      fetchPriority={prioridad ? 'high' : undefined}
+      decoding="async"
+    />
+  )
 }

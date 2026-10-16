@@ -12,8 +12,8 @@ function seo(sitio: string): Plugin {
   return {
     name: 'seo-negocio',
     transformIndexHtml(html, ctx) {
-      // Precarga las fuentes del título del hero (Anton) y del texto (Inter latin) para que no salte el layout.
-      const fuentes = Object.keys(ctx.bundle ?? {}).filter((f) => /(anton-latin-400-normal|inter-latin-wght-normal)-.*\.woff2$/.test(f))
+      // Precarga las fuentes de títulos (Sedgwick Ave Display), de etiquetas (Big Shoulders Stencil) y del texto (Inter latin) para que no salte el layout.
+      const fuentes = Object.keys(ctx.bundle ?? {}).filter((f) => /(sedgwick-ave-display-latin-400-normal|big-shoulders-stencil-display-latin-wght-normal|inter-latin-wght-normal)-.*\.woff2$/.test(f))
       const precargas = fuentes.map((f) => `<link rel="preload" href="/${f}" as="font" type="font/woff2" crossorigin />`).join('\n    ')
       const datos = {
         '@context': 'https://schema.org',
@@ -46,9 +46,10 @@ function seo(sitio: string): Plugin {
 }
 
 export default defineConfig(({ mode }) => {
-  // Si no se cargó VITE_SITE_URL, en Vercel se usa el dominio de producción del proyecto.
+  // Si no se cargó VITE_SITE_URL, se usa el dominio que da la plataforma: el de producción en Vercel,
+  // o la URL de este deploy en Cloudflare Pages.
   const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  const sitio = (loadEnv(mode, process.cwd()).VITE_SITE_URL || (vercel ? `https://${vercel}` : '')).replace(/\/$/, '')
+  const sitio = (loadEnv(mode, process.cwd()).VITE_SITE_URL || (vercel ? `https://${vercel}` : '') || process.env.CF_PAGES_URL || '').replace(/\/$/, '')
   return {
     plugins: [react(), seo(sitio)],
     test: { environment: 'node' },

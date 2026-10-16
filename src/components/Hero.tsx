@@ -2,6 +2,7 @@ import { negocio } from '../data/business'
 import { linkWhatsApp } from '../lib/whatsapp'
 import { EstadoLocal } from './EstadoLocal'
 import { IconoFlecha, IconoWhatsApp } from './Iconos'
+import { Logo } from './Logo'
 
 /** Las fotos del hero tienen dos tamaños: "nombre.webp" (640 px) y "nombre-320.webp". */
 function FotoHero({ foto, clase, sizes, prioridad = false }: { foto: { src: string; alt: string }; clase: string; sizes: string; prioridad?: boolean }) {
@@ -31,10 +32,17 @@ export function Hero() {
 
       <div className="contenedor hero__contenido">
         <EstadoLocal />
-        <h1 id="hero-titulo" className="display hero__titulo">
-          {negocio.nombre}
-          <span className="hero__bajada">{negocio.bajada}</span>
-        </h1>
+        {negocio.logoImagen ? (
+          <h1 id="hero-titulo" className="hero__titulo hero__titulo--logo">
+            <Logo className="hero__logo" sizes="(min-width: 1100px) 560px, (min-width: 640px) 400px, 86vw" prioridad />
+            <span className="hero__bajada">{negocio.bajada}</span>
+          </h1>
+        ) : (
+          <h1 id="hero-titulo" className="display hero__titulo">
+            {negocio.nombre}
+            <span className="hero__bajada">{negocio.bajada}</span>
+          </h1>
+        )}
         <p className="cuerpo texto-suave hero__slogan">{negocio.slogan}</p>
         <div className="hero__ctas">
           <a href="#menu" className="boton boton--primario boton--grande">

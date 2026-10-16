@@ -1,6 +1,6 @@
 # Landing de hamburguesería: menú, carrito y pedido por WhatsApp
 
-Modelo de landing para negocios de comida. Una sola página con un menú que tiene opciones y extras, un carrito con checkout, y el pedido armado que se envía por WhatsApp. No tiene backend ni cobro online. Los datos actuales son de demo ("Nombre Burger").
+Modelo de landing para negocios de comida. Una sola página con un menú que tiene opciones y extras, un carrito con checkout, y el pedido armado que se envía por WhatsApp. No tiene backend ni cobro online. Esta rama (`smash-art`) tiene la marca de demo "Smash Art", con tema de arte callejero; `main` tiene el modelo base ("Nombre Burger").
 
 Stack: Vite, React y TypeScript, con CSS plano y variables. Es un sitio 100 % estático.
 
@@ -20,8 +20,8 @@ No hace falta tocar componentes. Todo lo que cambia entre clientes está en esto
 | Qué | Campo |
 |---|---|
 | Nombre, frase entre paréntesis de la portada, slogan | `nombre`, `bajada`, `slogan` |
-| Logo | `logoTexto`, o `logoImagen: '/img/logo.svg'` si hay logo en imagen |
-| WhatsApp que recibe los pedidos | `whatsapp`, en formato internacional sin `+` ni espacios: `549` + característica sin 0 + número sin 15. Ej.: (263) 15 400-0000 → `5492634000000` |
+| Logo | `logoTexto`, o `logoImagen: { src: '/img/logo.webp', ancho, alto }` si hay logo en imagen (webp con fondo transparente; si existe `logo-360.webp` se usa en celulares). Con logo en imagen, la portada muestra el logo en lugar del nombre. |
+| WhatsApp que recibe los pedidos | `whatsapp`, en formato internacional sin `+` ni espacios: `549` + característica sin 0 + número sin 15. Ej.: (2634) 15 55-5208 → `5492634555208` |
 | Número tal como se muestra en el sitio | `whatsappVisible` |
 | Dirección y mapa | `direccion`, `localidad`, `provincia`, `mapsLink`, `mapsEmbed` (con `null` se oculta el mapa) |
 | Horarios | `horarios`: `0` = domingo … `6` = sábado. Cada día lleva una lista de turnos `{ abre, cierra }`. Un turno que cierra después de medianoche se carga tal cual (ej. `20:00` a `01:30`). Un día cerrado se carga como `[]`. |
@@ -52,13 +52,15 @@ El cartel "Abierto ahora / Cerrado · abre a las HH:MM" se calcula solo, con la 
 - **Productos**: `public/img/productos/<imagen>-400.webp` y `<imagen>-800.webp`, en formato 4:3 (400×300 y 800×600). En `products.ts` se carga solo el nombre base (`imagen: 'doble-cheddar'`).
 - **Portada**: 3 fotos cuadradas, `hero-N.webp` (640×640) y `hero-N-320.webp` (320×320). Se recortan solas con forma irregular.
 - **Quiénes somos**: `local.webp`, cuadrada (640×640).
-- **Vista previa al compartir** (`public/og.jpg`, 1200×630), **favicon** (`public/favicon.svg`, `favicon-32.png`) e **ícono de iPhone** (`public/apple-touch-icon.png`, 180×180): reemplazarlos con la marca del cliente.
+- **Vista previa al compartir** (`public/og.jpg`, 1200×630), **favicon** (`public/favicon-32.png`) e **ícono de iPhone** (`public/apple-touch-icon.png`, 180×180): reemplazarlos con la marca del cliente.
 
 Las fotos de la demo son de Unsplash (licencia libre). Para un cliente real, usar fotos propias.
 
 ### 4. Marca: `src/styles/tokens.css`
 
-Colores, tipografías, tamaños, espaciados y radios. Cambiando las seis variables de color y las dos familias tipográficas, todo el sitio cambia de marca. Las fuentes se instalan con npm (`@fontsource/...`) y se importan en `src/main.tsx`.
+Colores, tipografías, tamaños, espaciados, radios y texturas. Cambiando las variables de color, las familias tipográficas y la textura de pared (`--pared`), todo el sitio cambia de marca. Las fuentes se instalan con npm (`@fontsource/...`) y se importan en `src/main.tsx`.
+
+`src/styles/tema.css` es la "piel" de la marca actual (Smash Art: pared de ladrillo, títulos en graffiti, letras de plantilla, botones tipo sticker). Para otro cliente se puede reescribir o borrar (junto con su import en `src/main.tsx`) sin tocar el resto de los estilos.
 
 ### 5. Textos para buscadores y redes: `index.html`
 

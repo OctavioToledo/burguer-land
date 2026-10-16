@@ -15,12 +15,16 @@ export type MedioDePago = 'efectivo' | 'transferencia'
 
 export interface Negocio {
   nombre: string
-  /** Frase corta que va entre paréntesis debajo del nombre en la portada, ej. "(a la parrilla)". */
+  /** Frase corta que va entre paréntesis debajo del nombre en la portada, ej. "(smash burgers)". */
   bajada: string
   slogan: string
-  /** Texto en el logo del header y el footer. Si hay logo en imagen, poner la ruta en `logoImagen`. */
+  /** Texto en el logo del header y el footer. Si hay logo en imagen, cargarlo en `logoImagen`. */
   logoTexto: string
-  logoImagen: string | null
+  /**
+   * Logo en imagen (webp con fondo transparente) o null para usar `logoTexto`.
+   * Si existe "nombre-360.webp" al lado, se usa en pantallas chicas. Con logo, la portada lo muestra en lugar del nombre.
+   */
+  logoImagen: { src: string; ancho: number; alto: number } | null
   /** Formato internacional sin "+" ni espacios. Ej.: (263) 15 400-0000 → 5492634000000 */
   whatsapp: string
   /** Cómo se muestra el número en el sitio. */

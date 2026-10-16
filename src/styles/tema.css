@@ -1,0 +1,199 @@
+/*
+ * Tema "Smash Art": arte callejero. Va después de componentes.css y solo cambia la piel:
+ * pared de ladrillo, títulos pintados, letras de plantilla y stickers pegados.
+ * Para otro cliente se puede borrar este archivo (y su import en main.tsx) y el sitio vuelve al estilo base.
+ */
+
+/* ---------- Tipografía ---------- */
+
+/* Títulos grandes: tag de graffiti, relleno rojo ladrillo con contorno negro y halo rojo como el logo */
+.display,
+.titulo-lg,
+.paso__numero {
+  font-family: var(--font-graffiti);
+  color: var(--pintura);
+  text-shadow: var(--contorno-pintura);
+  padding-top: 0;
+}
+
+.titulo-lg {
+  /* El tag va levemente torcido, como pintado a mano */
+  rotate: -2deg;
+}
+
+/* Letras de plantilla: todo lo que usa la fuente display va en negrita */
+.logo,
+.titulo,
+.nombre-producto,
+.menu-mobile__enlace,
+.bloque__titulo,
+.hoja__titulo,
+.grupo__nombre,
+.linea__nombre,
+.checkout__titulo,
+.resumen__total dd {
+  font-weight: var(--font-weight-display);
+}
+
+/* La plantilla es más angosta que Inter: en UI va un punto más grande para que se lea igual */
+.boton,
+.pastilla,
+.etiqueta,
+.badge,
+.header__enlace,
+.header__carrito {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+}
+
+.badge {
+  font-size: 13px;
+}
+
+/* Apertura de sección: la frase va en una tira de cinta de papel pegada, en lugar de ◂ ▸ */
+.apertura__ojal {
+  padding: 4px 12px;
+  background: var(--suave);
+  color: var(--negro);
+  rotate: 1.5deg;
+  box-shadow: 2px 2px 0 var(--negro);
+}
+
+.apertura__ojal::before,
+.apertura__ojal::after {
+  content: none;
+}
+
+/* ---------- Pared de ladrillo ---------- */
+
+.hero,
+.nosotros,
+.footer {
+  background-color: var(--fondo);
+  background-image: var(--pared-velo), var(--pared);
+  background-size: auto, var(--pared-tamano);
+}
+
+/* En la portada la pared se oscurece hacia el centro, donde van el texto y los botones */
+.hero {
+  background-image:
+    radial-gradient(ellipse 60% 55% at 50% 50%, rgb(0 0 0 / 0.55), transparent 75%),
+    var(--pared-velo),
+    var(--pared);
+  background-size: auto, auto, var(--pared-tamano);
+}
+
+/* Borde inferior irregular, como pintura pasada a rodillo sobre la pared */
+.hero::after,
+.nosotros::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 36px;
+  z-index: 0;
+  background: var(--fondo);
+  mask: url('/img/borde-pintura.svg') bottom / 480px 36px repeat-x;
+  pointer-events: none;
+}
+
+.nosotros {
+  position: relative;
+}
+
+.nosotros::after {
+  background: var(--superficie);
+}
+
+.hero__slogan,
+.nosotros__parrafo {
+  text-shadow: 0 1px 2px var(--negro);
+}
+
+/* ---------- Portada ---------- */
+
+.hero__titulo--logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.hero__logo {
+  width: min(86vw, 560px);
+  height: auto;
+  rotate: -4deg;
+  filter: drop-shadow(6px 8px 0 rgb(0 0 0 / 0.6));
+}
+
+.hero__titulo--logo .hero__bajada {
+  margin-top: 0;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--text-subheading);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--suave);
+}
+
+/* En tablet las fotos quedan cerca del centro: el logo se achica para no taparlas */
+@media (min-width: 640px) and (max-width: 1099px) {
+  .hero__logo {
+    width: 400px;
+  }
+  .hero__foto--1 {
+    width: 26vw;
+    bottom: 4%;
+  }
+}
+
+/* Las fotos sobre la pared, como afiches pegados: sombra dura sin desenfoque */
+.hero__foto,
+.nosotros__foto img {
+  filter: drop-shadow(var(--sombra-sticker));
+}
+
+/* ---------- Botones y stickers ---------- */
+
+.boton--primario {
+  box-shadow: var(--sombra-sticker);
+}
+
+.boton--primario:active:not(:disabled) {
+  box-shadow: 1px 1px 0 var(--negro);
+  transform: translate(3px, 3px);
+}
+
+/* El botón fantasma tiene que leerse arriba de la pared */
+.boton--fantasma {
+  background: rgb(0 0 0 / 0.55);
+}
+
+.badge {
+  rotate: -3deg;
+  box-shadow: 2px 2px 0 var(--negro);
+}
+
+.tarjeta {
+  border-width: 2px;
+}
+
+.paso {
+  border-width: 2px;
+  box-shadow: var(--sombra-sticker);
+}
+
+.paso:nth-child(2) {
+  rotate: 1deg;
+}
+
+/* ---------- Logo en imagen ---------- */
+
+.header .logo-img {
+  height: 44px;
+}
+
+.footer .logo-img {
+  height: 88px;
+}
