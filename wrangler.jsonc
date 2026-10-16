@@ -1,0 +1,10 @@
+// Deploy en Cloudflare (Worker de solo archivos estáticos). Se publica con `npm run deploy`.
+{
+  "name": "burguer-land",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "observability": { "enabled": true }
+}
